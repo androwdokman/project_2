@@ -1,0 +1,275 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Recipes</title>
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header"><a href="/" class="navbar-brand text-uppercase navbar-link">Recipe Website</a>
+                <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation"><a href="/">Home</a></li>
+                    <li role="presentation"><a href="/recipe">Recipes</a></li>
+                    <li role="presentation"><a href="/myrecipes">My Recipes</a></li>
+                    <li role="presentation" class="active"><a href="/user-recipes">Edit Recipes</a></li>
+
+                </ul>
+                <a href="/logout" class="btn btn-primary navbar-btn navbar-right signup-btn" role="button"><strong>Log Out</strong></a>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h2 class="page-title" style="margin:20px 0px 20px 0px">MyRecipes</h2>
+                </div><br>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Recipe</button>
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <!-- <h3 class="box-title">Recipes</h3> -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Recipe Name</th>
+                                        <th>Description</th>
+                                        <th>Image Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(var i = 0 ; i < recipe.length; i++){ %>
+                                        <tr>
+                                            <td class="recipeid">
+                                                <%= recipe[i].id %>
+                                            </td>
+                                            <td class="recipename">
+                                                <%= recipe[i].name %>
+                                            </td>
+                                            <td class="recipedescription">
+                                                <%= recipe[i].description %>
+                                            </td>
+                                            <td class="recipelink" style="width:25%;">
+                                                <%= recipe[i].imagelink %>
+                                            </td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <a data-toggle="modal" data-target="#edit" class="editrecipe"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                    <a class="deletee" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Recipe</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                            <!-- Tab panes -->
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal" method="post" action="/user-recipe-addrecipe">
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                                                Recipe Name</label>
+                                        <div class="col-sm-10">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <input type="text" name="name" class="form-control" placeholder="Recipe Name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile" class="col-sm-2 control-label">
+                                                                Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="description" rows="8"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                                                Image Link</label>
+                                        <div class="col-sm-10">
+                                            <input type="textarea" name="imagelink" class="form-control" placeholder="Put a link in here" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                                    Save & Continue</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--form end -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Recipe</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                            <!-- Tab panes -->
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                                                Recipe Name</label>
+                                        <div class="col-sm-10">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <input type="text" id="editname" name="name" class="form-control" placeholder="Recipe Name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile" class="col-sm-2 control-label">
+                                                                Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="editdescription" name="description" rows="8"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                                                Image Link</label>
+                                        <div class="col-sm-10">
+                                            <input type="textarea" name="imagelink" id="editimagelink" class="form-control" placeholder="Put a link in here" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <button type="submit" id="submitedit" class="btn btn-primary btn-sm">
+                                                                    Save & Continue</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="./plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="./plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="./js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="./js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="./js/custom.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var id = 0;
+            $('.editrecipe').click(function() {
+                id = $(this).parents('tr').find('td.recipeid').html();
+                name = $(this).parents('tr').find('td.recipename').html();
+                link = $(this).parents('tr').find('td.recipelink').html();
+                description = $(this).parents('tr').find('td.recipedescription').html();
+                $('#editname').val(name);
+                $('#editdescription').val(description);
+                $('#editimagelink').val(link);
+                console.log("id = ", id)
+            });
+            $('#submitedit').click(function() {
+                var name = $('#editname').val();
+                var description = $('#editdescription').val();
+                var link = $('#editimagelink').val();
+                console.log("id = ", id)
+                $.ajax({
+                    method: 'PUT',
+                    url: '/edit-userrecipe/' + id,
+                    data: {
+                        name: name,
+                        description: description,
+                        link: link
+                    },
+                    success: function(data) {
+                        window.location.reload();
+                    },
+                    error: function() {
+                        console.log('error');
+                    }
+                })
+            })
+            $('.deletee').click(function() {
+                id = $(this).parents('tr').find('td.recipeid').html();
+
+                dbname = 'recipes';
+                $.ajax({
+                    method: 'delete',
+                    url: '/deleterecipe',
+                    data: {
+                        id: id,
+                        dbname: dbname
+                    },
+                    success: function(data) {
+
+                    }
+                });
+                location.reload();
+            })
+
+        });
+    </script>
+</body>
+
+</html>

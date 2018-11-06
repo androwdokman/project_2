@@ -1,0 +1,181 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes</title>
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header"><a href="/" class="navbar-brand text-uppercase navbar-link">Recipe Website</a>
+                <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation"><a href="/">Home</a></li>
+                    <li role="presentation" class="active"><a href="/">Recipes</a></li>
+                    <% if(check==0){ %>
+                </ul>
+                <a class="btn btn-primary navbar-btn navbar-right" role="button" href="#" data-toggle="modal" data-target="#login-modal"><strong>Login</strong> </a></div>
+            <% } else { %>
+                <li role="presentation"><a href="/myrecipes">My Recipes</a></li>
+                <li role="presentation"><a href="/user-recipes">Edit Recipes</a></li>
+                </ul>
+                <a href="/logout" class="btn btn-primary navbar-btn navbar-right signup-btn" role="button"><strong>Log Out</strong></a>
+                <% } %>
+        </div>
+        </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <a href="recipe.html">
+                <h1 class="jumbotron myfont" style="background-color:#222; color:aliceblue">Recipes</h1>
+            </a>
+        </div>
+        <div class="row">
+            <% for (var i = 0 ; i < recipe.length; i++) { %>
+                <div class="col-sm-3">
+                    <div class="card btw-cards" style="width: 20rem;">
+                        <img class="card-img-top" src="<%= recipe[i].imagelink  %>" height="200" width="225" alt="Card image cap">
+                        <p class="recipedesc" style="display:none;">
+                            <%= recipe[i].description %>
+                        </p>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <%= recipe[i].name  %>
+                            </h4>
+                            <a href="#" class="btn btn-primary recipedescription" data-toggle="modal" data-target="#recipe-modal">Decription</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>
+    <!-- END OF CONTAINER -->
+    <footer class="navbar navbar-inverse footer-custom">
+        <div class="footer-text">
+            <b>Copyright © 2017. All Rights Reservedn</b>
+        </div>
+
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal fade" id="login-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Login Form</h3>
+                </div>
+                <!-- body -->
+                <div class="modal-header">
+                    <form method="post" action="/login">
+                        <button type="submit" class="btn btn-primary btn-block">Login Google+</button>
+                    </form>
+                </div>
+                <!-- footer -->
+
+
+            </div>
+        </div>
+    </div>
+    <!-- SIGNUP MODAL -->
+    <div class="modal fade" id="signup-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Create Account</h3>
+                </div>
+                <!-- body -->
+                <div class="modal-header">
+                    <form id="signupform" method="post" action="/sign-up-user">
+                        <div class="form-group">
+                            <label>Username</label>
+
+                            <input type="text" name="name" id="namesignup" class="form-control" id="exampleInputEmail1" placeholder="johndoe">
+                        </div>
+                        <div class="form-group">
+                            <p class="error" id="nameerror" style="color:red;font-size:11px;display:none">***Don't leave it empty</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="passwordsignup" name="password" class="form-control" placeholder="••••••••••••">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="confirmpasswordsignup" name="confirmpassword" class="form-control" placeholder="••••••••••••">
+                        </div>
+                        <div class="form-group">
+                            <p class="error" id="passworderror" style="color:red;font-size:11px;display:none">***Password Fields do not match</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="johndoe@outlook.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <div class="radio">
+                                <label><input type="radio" value="Male" name="gender">Male</label>
+                                <label><input type="radio" value="Female" name="gender">Female</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dateofbirth" class="form-control" placeholder="johndoe@outlook.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Nationality</label>
+                            <select class="form-control" name="nationality">
+                                <option value="uk">UK</option>
+                                <option value="us">Us</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Germany">Germany</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" id="submitcreate" class="btn btn-primary btn-block">Create Account</button>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- footer -->
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    </div>
+    </div>
+    </div>
+    <!-- END of SIGNUP MODAL -->
+
+    <div class="modal fade" id="recipe-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Desciption</h4>
+                </div>
+                <!-- /modal-header -->
+                <div class="modal-body clearfix">
+                    <pre><h5 id= "showdesription" > </h5></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

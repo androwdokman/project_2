@@ -1,0 +1,30 @@
+.signup-btn {
+    margin : 0px 10px;
+}
+
+.footer-text{
+    color: #fff;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.myfont{
+    color: #051e47;
+    font-family: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, serif;
+    text-align: center;
+}
+
+.gap{
+    margin: 20px 0px;
+}
+
+.footer-custom{
+    margin-top: 20px;
+}
+
+.jumbotron-custom{
+    background-color: blue;
+    color: aqua;
+}
+
+
